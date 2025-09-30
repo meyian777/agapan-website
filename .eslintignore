@@ -1,0 +1,7 @@
+# Ignorar dependencias y build
+node_modules/
+.next/
+
+# Ignorar código generado automáticamente
+app/generated/
+prisma/
