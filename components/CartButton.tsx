@@ -1,21 +1,35 @@
-'use client'
+'use client';
 
-import { useCart } from '@/context/CartContext'
+import { ShoppingCart } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { useEffect, useState } from 'react';
 
-type Props = {
-  onClick: () => void
-}
+export default function CartButton({ onClick }: { onClick: () => void }) {
+  const { items } = useCart();
+  const [glow, setGlow] = useState(false);
 
-export default function CartButton({ onClick }: Props) {
-  const { cart } = useCart()
-  const totalItems = (cart ?? []).reduce((sum, item) => sum + item.quantity, 0)
+  // ✨ Detecta cuando se agrega producto y activa la animación Glow
+  useEffect(() => {
+    if (items.length > 0) {
+      setGlow(true);
+      const timeout = setTimeout(() => setGlow(false), 600);
+      return () => clearTimeout(timeout);
+    }
+  }, [items]);
+
+  // Cantidad total de productos
+  const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <button
       onClick={onClick}
-      className="fixed bottom-6 right-6 px-4 py-2 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-800 z-50"
+      className={`cart-button ${glow ? 'cart-glow' : ''}`}
+      aria-label="Abrir carrito"
     >
-      🛒 {totalItems}
+      <ShoppingCart className="w-6 h-6" />
+      {totalQty > 0 && (
+        <span className="cart-badge">{totalQty}</span>
+      )}
     </button>
-  )
+  );
 }

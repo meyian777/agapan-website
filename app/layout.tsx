@@ -1,9 +1,17 @@
-'use client'
+import "./globals.css";
+import type { Metadata } from "next";
+import { CartProvider } from "@/context/CartContext";
 
-import './globals.css'
-import { CartProvider } from '@/context/CartContext'
+export const metadata: Metadata = {
+  title: "AGAPAN Artisan Bakery",
+  description: "Artisan breads made with love by Mari & Ian",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
@@ -12,5 +20,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </CartProvider>
       </body>
     </html>
-  )
+  );
 }

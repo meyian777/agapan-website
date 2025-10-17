@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
+/* 🎨 Colores base */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+/* 🌿 Tema */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,7 +14,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* 🔥 Animación fadeIn */
+/* ✨ Animación FadeIn */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -23,7 +25,260 @@
     transform: scale(1);
   }
 }
-
 .animate-fadeIn {
   animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* ✨ Animaciones Slide (Carrito) */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+.slide-in {
+  animation: slideInRight 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.slide-out {
+  animation: slideOutRight 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) forwards;
+}
+
+/* 💓 Animación Pulse */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+.pulse {
+  animation: pulse 0.8s ease-in-out;
+}
+
+/* 💫 Pulse Glow (nuevo, sutil y premium) */
+@keyframes cartGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(139, 94, 60, 0);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(139, 94, 60, 0.6);
+  }
+}
+.cart-glow {
+  animation: cartGlow 0.6s ease-in-out;
+}
+
+/* ➕➖ Botón cantidad */
+.qty-btn {
+  background-color: #8B5E3C; /* Marrón artesanal */
+  color: #fff;
+  font-weight: bold;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.qty-btn:hover {
+  background-color: #6E452A; /* Marrón más oscuro */
+  transform: scale(1.05);
+}
+
+/* 🔢 Input cantidad dentro del carrito */
+.qty-input {
+  width: 2.5rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  margin: 0 0.5rem;
+  font-weight: 500;
+}
+
+/* 🛒 Carrito lateral */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  max-width: 95%;
+  height: 100%;
+  background-color: #fef8f2;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+  padding: 1.25rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-left: 4px solid #8B5E3C; /* Marrón artesanal */
+}
+
+/* ✨ Scrollbar personalizada carrito */
+.cart-panel::-webkit-scrollbar {
+  width: 6px;
+}
+.cart-panel::-webkit-scrollbar-thumb {
+  background-color: #8B5E3C;
+  border-radius: 4px;
+}
+.cart-panel::-webkit-scrollbar-track {
+  background: #fef8f2;
+}
+
+/* 🗑️ Botón eliminar producto */
+.remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  color: #8B5E3C;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.remove-btn:hover {
+  color: #6E452A;
+  transform: scale(1.2);
+}
+
+/* ✅ Botón confirmar pedido */
+.confirm-btn {
+  background: linear-gradient(135deg, #8B5E3C, #6E452A); /* Marrón degradado */
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(81, 112, 88, 0.3);
+}
+
+/* 🎨 Botón flotante carrito (arriba derecha) */
+.cart-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #8B5E3C; /* Marrón artesanal */
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 60;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.cart-button:hover {
+  background-color: #6E452A;
+  transform: scale(1.05);
+}
+
+/* 🔠 Animación hover para "AGAPAN" */
+.agapan-hover {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+.agapan-hover:hover {
+  transform: scale(1.1) rotate(-1deg);
+  color: #d4a373; /* tono artesanal dorado */
+}
+
+/* ✨ Animación hover para "Artisan Bakery" */
+.artisan-hover {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.artisan-hover:hover {
+  transform: scale(1.05);
+  color: #c9a87c; /* tono artesanal cálido */
+}
+
+/* 🟢 WhatsApp Mari */
+.whatsapp-mari {
+  background: linear-gradient(135deg, #25D366, #128C7E); /* Verde WhatsApp */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.whatsapp-mari:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+
+/* 🔵 WhatsApp Ian */
+.whatsapp-ian {
+  background: linear-gradient(135deg, #0078FF, #005BBB); /* Azul tecnológico */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.whatsapp-ian:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 120, 255, 0.4);
+}
+
+/* ✨ Animación individual para cada letra de AGAPAN */
+@keyframes letterBounce {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-6px) scale(1.1); }
+  60% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+.letter-hover {
+  display: inline-block;
+  transition: color 0.3s ease;
+  cursor: default;
+}
+.letter-hover:hover {
+  animation: letterBounce 0.5s ease;
+  color: #d4a373; /* dorado artesanal */
+}
+/* ✨ Animación suave para texto recomendado */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recommended-text {
+  animation: fadeUp 0.9s ease-out forwards;
+  font-family: 'Great_Vibes', cursive;
+  letter-spacing: 0.03em;
+  color: #fef8f2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  opacity: 0; /* Aparece con animación */
 }

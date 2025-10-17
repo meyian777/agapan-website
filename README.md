@@ -14,9 +14,9 @@ This project is part of my learning path as a Full-Stack Developer and is direct
 ---
 
 ## 📷 Screenshots
-![Home Page](public/images/screenshot-home.png)  
-![Products](public/images/screenshot-products.png)  
-![Cart](public/images/screenshot-cart.png)  
+![Home Page](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-home.png)  
+![Products](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-products.png)  
+![Cart](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-cart.png)  
 
 ---
 
@@ -50,5 +50,3 @@ and a working tool for my artisan bakery.
 📍 Jacksonville, Florida  
 📧 meyian_777@outlook.com  
 📧 meymcian@gmail.com  
-
----

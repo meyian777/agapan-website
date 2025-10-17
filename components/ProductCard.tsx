@@ -1,60 +1,35 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import { useCart } from '@/context/CartContext'
+import { useCart } from '@/context/CartContext';
 
-type Product = {
-  id: string
-  name: string
-  price: number
-  description?: string
-  image?: string
-}
-
-export default function ProductCard({ product }: { product: Product }) {
-  const { addToCart } = useCart()
-
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      description: product.description, // 👈 ahora se guarda
-      quantity: 1,
-    })
-  }
-
-  // aseguramos la ruta de la imagen
-  const imageSrc =
-    product.image && product.image.trim() !== ''
-      ? product.image.startsWith('/')
-        ? product.image
-        : `/${product.image}`
-      : ''
+export default function ProductCard({ product }: { product: any }) {
+  const { addToCart } = useCart();
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-4 flex flex-col items-center text-center hover:scale-105 transition-transform animate-fadeIn">
-      {imageSrc && (
-        <div className="w-[160px] h-[160px] relative">
-          <Image
-            src={imageSrc}
-            alt={product.name}
-            fill
-            className="rounded-lg object-cover shadow-md"
-          />
-        </div>
-      )}
-      <h2 className="text-lg font-semibold mt-4">{product.name}</h2>
-      <p className="text-gray-600">${product.price.toFixed(2)}</p>
-      {product.description && (
-        <p className="text-xs text-gray-500 mt-1 italic">{product.description}</p>
-      )}
-      <button
-        onClick={handleAddToCart}
-        className="mt-4 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
-      >
-        Add to Cart
-      </button>
+    <div className="bg-[#fef8f2] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1">
+      <img
+        src={product.imageUrl}
+        alt={product.name}
+        className="w-full h-48 object-cover"
+      />
+      <div className="p-4 text-[#3a503a]">
+        <h3 className="text-xl font-bold">{product.name}</h3>
+        <p className="text-sm text-gray-600 mb-2">${product.price}</p>
+        <button
+          onClick={() =>
+            addToCart({
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              imageUrl: product.imageUrl,
+              quantity: 1,
+            })
+          }
+          className="w-full bg-[#517058] text-white py-2 rounded hover:bg-[#405944] transition"
+        >
+          Agregar al carrito
+        </button>
+      </div>
     </div>
-  )
+  );
 }
