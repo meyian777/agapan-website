@@ -50,7 +50,7 @@ export default function Navbar() {
       </nav>
 
       {/* Carrito conectado */}
-      <CartModal open={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 }
