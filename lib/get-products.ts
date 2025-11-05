@@ -1,13 +1,23 @@
+
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
 
-// Productos base (sin cambios)
-const productsList = [
+const globalForPrisma = global as unknown as { prisma?: PrismaClient };
+
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: ['error', 'warn'],
+  });
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+
+// 🥖 Productos base (sin cambios)
+const productsList: Product[] = [
   {
     id: 1,
     name: 'Pan con Bocadillo',
-    price: 2.50,
+    price: 2.5,
     description:
       'Suave pan artesanal relleno con bocadillo, el contraste perfecto entre dulce y esponjoso.',
     imageUrl: '/images/pan-bocadillo.jpg',
@@ -16,16 +26,16 @@ const productsList = [
   {
     id: 2,
     name: 'Pandibono',
-    price: 2.00,
+    price: 2.0,
     description:
       'El clásico pandibono colombiano, crujiente por fuera y suave por dentro.',
     imageUrl: '/images/pan-dibono.jpg',
-    orders: 25, // 🔥 Más vendido (por ahora)
+    orders: 25,
   },
   {
     id: 3,
     name: 'Pan con Jamón',
-    price: 13.00,
+    price: 13.0,
     description:
       'Pan suave horneado con jamón, ideal para desayunos y meriendas.',
     imageUrl: '/images/pan-jamon.jpg',
@@ -34,7 +44,7 @@ const productsList = [
   {
     id: 4,
     name: 'Pan de Masa Madre',
-    price: 13.00,
+    price: 13.0,
     description:
       'Hecho con fermentación natural, corteza crujiente y miga aireada, perfecto para los amantes del buen pan.',
     imageUrl: '/images/pan-masamadre.jpg',
@@ -43,7 +53,7 @@ const productsList = [
   {
     id: 5,
     name: 'Pan de Queso',
-    price: 3.00,
+    price: 3.0,
     description:
       'Delicioso pan artesanal con queso, esponjoso y con un sabor irresistible.',
     imageUrl: '/images/pan-queso.jpg',
@@ -51,23 +61,40 @@ const productsList = [
   },
 ];
 
+// 🧩 Carga de productos
 export async function getProducts() {
   try {
-    // 🔹 Ordena por ID (más recientes primero)
-    const products = [...productsList].sort((a, b) => b.id - a.id);
+    let products: Product[] = [];
 
-    // 🔥 Encuentra el producto más vendido
-    const recommendedProduct = [...productsList].sort(
-      (a, b) => b.orders - a.orders
-    )[0];
+    // Intenta conectar con la base de datos
+    try {
+      await prisma.$connect();
+      const dbProducts = await prisma.product.findMany();
+      if (dbProducts && dbProducts.length > 0) {
+        products = dbProducts;
+      }
+      await prisma.$disconnect();
+    } catch (dbError) {
+      console.warn('⚠️ Prisma no disponible, usando productos locales');
+    }
 
-    // ✅ Devuelve el array completo, marcando cuál es el recomendado
-    return products.map((p) => ({
+    // Si no hay productos en la BD, usa los locales
+    if (products.length === 0) {
+      products = [...productsList];
+    }
+
+    // Ordena por ID descendente
+    const sorted = [...products].sort((a, b) => b.id - a.id);
+
+    // Encuentra el más vendido
+    const recommended = [...products].sort((a, b) => b.orders - a.orders)[0];
+
+    return sorted.map((p) => ({
       ...p,
-      isRecommended: p.id === recommendedProduct.id,
+      isRecommended: p.id === recommended.id,
     }));
   } catch (error) {
-    console.error("❌ Error en getProducts:", error);
+    console.error('❌ Error en getProducts:', error);
     return [];
   }
 }
