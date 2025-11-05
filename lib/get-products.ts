@@ -13,7 +13,7 @@ export const prisma =
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
 // 🥖 Productos base (sin cambios)
-const productsList: Product[] = [
+const productsList = [
   {
     id: 1,
     name: 'Pan con Bocadillo',
