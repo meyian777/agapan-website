@@ -15,6 +15,8 @@ export default function ProductCard({ product }: { product: any }) {
       <div className="p-4 text-[#3a503a]">
         <h3 className="text-xl font-bold">{product.name}</h3>
         <p className="text-sm text-gray-600 mb-2">${product.price}</p>
+
+        {/* 🔘 Botón actualizado */}
         <button
           onClick={() =>
             addToCart({
@@ -25,7 +27,7 @@ export default function ProductCard({ product }: { product: any }) {
               quantity: 1,
             })
           }
-          className="w-full bg-[#517058] text-white py-2 rounded hover:bg-[#405944] transition"
+          className="add-to-cart-btn w-full"
         >
           Agregar al carrito
         </button>

@@ -1,4 +1,3 @@
-
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -17,7 +16,7 @@ const productsList = [
   {
     id: 2,
     name: 'Pandibono',
-    price: 2.0,
+    price: 2.00,
     description:
       'El clásico pandibono colombiano, crujiente por fuera y suave por dentro.',
     imageUrl: '/images/pan-dibono.jpg',
@@ -26,7 +25,7 @@ const productsList = [
   {
     id: 3,
     name: 'Pan con Jamón',
-    price: 3.0,
+    price: 13.00,
     description:
       'Pan suave horneado con jamón, ideal para desayunos y meriendas.',
     imageUrl: '/images/pan-jamon.jpg',
@@ -53,11 +52,22 @@ const productsList = [
 ];
 
 export async function getProducts() {
-  // Simula productos ordenados por fecha
-  const products = productsList.sort((a, b) => b.id - a.id);
+  try {
+    // 🔹 Ordena por ID (más recientes primero)
+    const products = [...productsList].sort((a, b) => b.id - a.id);
 
-  // 🔥 Encuentra el producto más pedido de la semana
-  const recommendedProduct = [...productsList].sort((a, b) => b.orders - a.orders)[0];
+    // 🔥 Encuentra el producto más vendido
+    const recommendedProduct = [...productsList].sort(
+      (a, b) => b.orders - a.orders
+    )[0];
 
-  return { products, recommendedProduct };
+    // ✅ Devuelve el array completo, marcando cuál es el recomendado
+    return products.map((p) => ({
+      ...p,
+      isRecommended: p.id === recommendedProduct.id,
+    }));
+  } catch (error) {
+    console.error("❌ Error en getProducts:", error);
+    return [];
+  }
 }
