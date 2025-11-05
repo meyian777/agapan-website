@@ -1,5 +1,5 @@
 'use client'
-
+export const dynamic = "force-dynamic";
 import { useEffect, useState } from 'react'
 import { getProducts } from '@/lib/get-products'
 import ProductCard from '@/components/ProductCard'
