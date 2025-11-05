@@ -2,10 +2,17 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type CartItem = { id: string; name: string; price: number; imageUrl: string; quantity: number };
+type CartItem = { 
+  id: string; 
+  name: string; 
+  price: number; 
+  imageUrl: string; 
+  quantity: number 
+};
 
 type CartContextType = {
   items: CartItem[];
+  cart: CartItem[]; // ✅ alias agregado para compatibilidad
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -21,21 +28,37 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems(prev => {
       const existing = prev.find(p => p.id === item.id);
       if (existing) {
-        return prev.map(p => p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p);
+        return prev.map(p => 
+          p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p
+        );
       }
       return [...prev, { ...item, quantity: 1 }];
     });
   };
 
-  const removeFromCart = (id: string) => setItems(prev => prev.filter(p => p.id !== id));
+  const removeFromCart = (id: string) => 
+    setItems(prev => prev.filter(p => p.id !== id));
+
   const updateQuantity = (id: string, quantity: number) => {
     if (quantity < 1) return;
-    setItems(prev => prev.map(p => p.id === id ? { ...p, quantity } : p));
+    setItems(prev => 
+      prev.map(p => p.id === id ? { ...p, quantity } : p)
+    );
   };
+
   const clearCart = () => setItems([]);
 
   return (
-    <CartContext.Provider value={{ items, addToCart, removeFromCart, updateQuantity, clearCart }}>
+    <CartContext.Provider 
+      value={{ 
+        items, 
+        cart: items, // ✅ alias agregado para AddToCartModal
+        addToCart, 
+        removeFromCart, 
+        updateQuantity, 
+        clearCart 
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
