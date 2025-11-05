@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function CartModal({ onClose }: Props) {
-  const { cart, removeFromCart, clearCart } = useCart()
+  const { items: cart, removeFromCart, clearCart } = useCart();
   const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
   return (
