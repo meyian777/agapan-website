@@ -338,11 +338,40 @@
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   animation: fadeIn 1s ease-out forwards;
 }
+/* ✨ Interacción AGAPAN y Artisan con hover + clic */
+.letter-hover,
+.artisan-hover {
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.2s ease;
+  cursor: pointer; /* permite toque en móvil */
+  font-size: 3rem; /* tamaño base más visible en desktop */
+}
 
-.recommended-text {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.125rem;
-  line-height: 1.75;
-  opacity: 0.95;
-  animation: fadeIn 1.2s ease-out forwards;
+/* 💫 Animación al pasar el cursor */
+.letter-hover:hover,
+.artisan-hover:hover {
+  animation: letterBounce 0.5s ease;
+  color: #d4a373;
+}
+
+/* 💥 Animación al hacer clic/tocar */
+.letter-hover:active,
+.artisan-hover:active {
+  transform: scale(1.05);
+  color: #c2956a;
+}
+
+/* 📱 Responsivo */
+@media (max-width: 768px) {
+  .letter-hover,
+  .artisan-hover {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .letter-hover,
+  .artisan-hover {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
 }
