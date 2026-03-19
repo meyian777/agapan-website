@@ -113,7 +113,7 @@ export default function CartModal({
               <div className="space-y-2 mt-4">
                 <button
                   className="whatsapp-mari w-full flex items-center justify-center gap-2"
-                  onClick={() => openWhatsApp('9045822072')}
+                  onClick={() => openWhatsApp('9044700456')}
                 >
                   {/* Ícono oficial WhatsApp */}
                   <svg
@@ -129,7 +129,7 @@ export default function CartModal({
 
                 <button
                   className="whatsapp-ian w-full flex items-center justify-center gap-2"
-                  onClick={() => openWhatsApp('9045812039')}
+                  onClick={() => openWhatsApp('9045740924')}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
