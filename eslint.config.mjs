@@ -1,21 +1,32 @@
-// eslint.config.mjs
+import js from "@eslint/js";
 import eslintPluginNext from "@next/eslint-plugin-next";
+import tseslint from "typescript-eslint";
 
 export default [
   {
-    ignores: ["node_modules", ".next", "app/generated", "prisma"],
+    ignores: ["node_modules", ".next", "Next.js", "app/generated", "prisma"],
   },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        console: "readonly",
+        React: "readonly",
+        window: "readonly",
+      },
+    },
     plugins: {
       "@next/next": eslintPluginNext,
     },
     rules: {
-      // 🚀 Reglas relajadas para que no bloquee el build
-      "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-this-alias": "off",
-      "@typescript-eslint/no-unused-expressions": "off",
-      "@typescript-eslint/no-require-imports": "off",
     },
   },
 ];

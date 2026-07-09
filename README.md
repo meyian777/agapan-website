@@ -1,52 +1,82 @@
-# 🥖 AGAPAN Artisan Bakery  
+# AGAPAN Artisan Bakery
 
-AGAPAN is a personal bakery website I built to showcase my artisan bread products and also use for my real bakery business.  
-This project is part of my learning path as a Full-Stack Developer and is directly connected to my daily life.  
+AGAPAN is a real bakery website built with Next.js, TypeScript, Tailwind CSS, and Prisma tooling. It showcases artisan bakery products, lets customers build a cart, and sends the order directly through WhatsApp.
 
----
+This project is both a portfolio piece and a practical business tool for a local artisan bakery in Jacksonville, Florida.
 
-## 🚀 Tech Stack
-- **Next.js 15** – Modern React framework  
-- **TailwindCSS** – Utility-first styling  
-- **TypeScript** – Type safety  
-- **Prisma** – ORM for database (future use)  
+## Live Demo
 
----
+[agapan-website.vercel.app](https://agapan-website.vercel.app)
 
-## 📷 Screenshots
-![Home Page](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-home.png)  
-![Products](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-products.png)  
-![Cart](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-cart.png)  
+## Tech Stack
 
----
+- Next.js 15 App Router
+- React 19
+- TypeScript
+- Tailwind CSS
+- Prisma Client generation
+- WhatsApp order integration
 
-## 📌 Features
-- 🎥 Background video hero section  
-- 🥯 Product listing with images and descriptions  
-- 🛒 Shopping cart modal  
-- 📱 WhatsApp order integration (for real customer use)  
-- 🌐 Fully deployed on [Vercel](https://agapan-website.vercel.app)  
+## Features
 
----
+- Product catalog with images, prices, and descriptions
+- Recommended product section based on product order metadata
+- Shopping cart modal with quantity controls
+- WhatsApp checkout with a pre-filled order message
+- Responsive layout for desktop and mobile
+- Deployed on Vercel
 
-## 📖 Daily Usage
-This website is used to share my bakery’s products, receive WhatsApp orders,  
-and connect directly with my social networks. It’s both a portfolio project  
-and a working tool for my artisan bakery.  
+## Screenshots
 
----
+![AGAPAN home page](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-home.png)
+![AGAPAN products](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-products.png)
+![AGAPAN cart](https://raw.githubusercontent.com/meyian777/agapan-website/main/public/images/screenshot-cart.png)
 
-## 📌 Future Improvements
-- 💳 Online payments with Stripe  
-- 📊 Admin dashboard for managing orders  
-- 🗄️ Database integration (Prisma + PostgreSQL)  
-- 📢 Automatic notifications via WhatsApp/Email  
+## Getting Started
 
----
+Install dependencies:
 
-## 👨‍💻 Author
-**Ian Mey**  
-💼 Full-Stack Developer (in progress)  
-📍 Jacksonville, Florida  
-📧 meyian_777@outlook.com  
-📧 meymcian@gmail.com  
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Run TypeScript checks:
+
+```bash
+npm run typecheck
+```
+
+## Project Notes
+
+- Product data is currently local, which keeps the deployed site simple and reliable.
+- Prisma is included for future database-backed product and order management.
+- WhatsApp checkout uses real contact numbers and URL-safe message encoding.
+
+## Future Improvements
+
+- Admin dashboard for product management
+- Database-backed inventory and order history
+- Online payments
+- Automated email or WhatsApp notifications
+
+## Author
+
+Ian Mey  
+Full-Stack Developer in progress  
+Jacksonville, Florida  
+meyian_777@outlook.com  
+meymcian@gmail.com

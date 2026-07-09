@@ -1,5 +1,3 @@
-// ✅ Versión sin Prisma — full local data y sin errores de build
-
 const productsList = [
   {
     id: 1,

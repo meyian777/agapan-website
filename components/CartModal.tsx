@@ -12,6 +12,11 @@ export default function CartModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const whatsappContacts = {
+    mari: '19044700456',
+    ian: '19045740924',
+  };
+
   const { items, updateQuantity, removeFromCart, clearCart } = useCart();
   const [showWhatsApp, setShowWhatsApp] = useState(false);
 
@@ -23,15 +28,18 @@ export default function CartModal({
     const verse = getRandomVerse();
     const productsList = items
       .map((item) => `• ${item.quantity}x ${item.name} - $${item.price * item.quantity}`)
-      .join('%0A');
+      .join('\n');
 
-    return `¡Hola! Me gustaría hacer un pedido:%0A%0A${productsList}%0A%0ATotal: $${total.toFixed(
+    return `¡Hola! Me gustaría hacer un pedido:\n\n${productsList}\n\nTotal: $${total.toFixed(
       2
-    )}%0A%0A🙏 Gracias por su atención.%0A📖 ${verse}`;
+    )}\n\n🙏 Gracias por su atención.\n📖 ${verse}`;
   };
 
   const openWhatsApp = (phone: string) => {
-    const url = `https://wa.me/1${phone}?text=${buildMessage()}`;
+    const whatsappPhone = phone.replace(/\D/g, '');
+    const params = new URLSearchParams({ text: buildMessage() });
+    const url = `https://wa.me/${whatsappPhone}?${params.toString()}`;
+
     window.open(url, '_blank');
     clearCart();
     onClose();
@@ -113,7 +121,7 @@ export default function CartModal({
               <div className="space-y-2 mt-4">
                 <button
                   className="whatsapp-mari w-full flex items-center justify-center gap-2"
-                  onClick={() => openWhatsApp('9044700456')}
+                  onClick={() => openWhatsApp(whatsappContacts.mari)}
                 >
                   {/* Ícono oficial WhatsApp */}
                   <svg
@@ -129,7 +137,7 @@ export default function CartModal({
 
                 <button
                   className="whatsapp-ian w-full flex items-center justify-center gap-2"
-                  onClick={() => openWhatsApp('9045740924')}
+                  onClick={() => openWhatsApp(whatsappContacts.ian)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

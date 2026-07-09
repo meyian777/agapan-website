@@ -1,7 +1,3 @@
-// app/api/route.ts
-// 🚧 API temporalmente desactivada hasta configurar Resend y su API Key
-// Mantengo el handler vacío para que el build de Vercel no falle
-
 import { NextResponse } from "next/server";
 
 export async function GET() {

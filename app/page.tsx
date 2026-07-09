@@ -6,13 +6,13 @@ import ProductsGrid from "@/components/ProductsGrid";
 import CartButton from "@/components/CartButton";
 import CartModal from "@/components/CartModal";
 import Footer from "@/components/Footer";
-import InfoModal from "@/components/InfoModal"; // 👈 se agregó el import
+import InfoModal from "@/components/InfoModal";
 import { getProducts } from "@/lib/get-products";
 
 export default function Page() {
   const [products, setProducts] = useState<any[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isInfoOpen, setIsInfoOpen] = useState(false); // 👈 nuevo estado
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -36,7 +36,6 @@ export default function Page() {
 
   return (
     <>
-      {/* 🎥 VIDEO DE FONDO */}
       <video
         autoPlay
         muted
@@ -48,10 +47,8 @@ export default function Page() {
         Your browser does not support the video tag.
       </video>
 
-      {/* 🌿 CAPA DE COLOR */}
       <div className="fixed top-0 left-0 w-full h-full bg-[#6e8c6e]/70 z-[-1]" />
 
-      {/* 🥖 ENCABEZADO */}
       <header className="relative z-10 flex flex-col md:flex-row items-center justify-between py-16 px-8 space-y-4 md:space-y-0">
         <div className="flex-shrink-0">
           <Image
@@ -67,7 +64,7 @@ export default function Page() {
           <h1
             className="text-6xl tracking-[0.4em] uppercase agapan-hover cursor-pointer"
             title="Ver menú y precios"
-            onClick={() => setIsInfoOpen(true)} // 👈 aquí abrimos el modal artístico
+            onClick={() => setIsInfoOpen(true)}
           >
             <span className="letter-hover">A</span>
             <span className="letter-hover">G</span>
@@ -82,7 +79,6 @@ export default function Page() {
         </div>
       </header>
 
-      {/* 🌾 SECCIÓN VERDE */}
       <section className="relative z-10 py-16 px-6 bg-[#6e8c6e]/80 text-[#fef8f2] text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Baking with Purpose</h2>
         <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
@@ -106,7 +102,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 🥇 RECOMENDADOS DE LA SEMANA */}
       <section className="relative z-10 bg-transparent py-12 px-6 text-center">
         <h2 className="recommended-title text-3xl font-bold mb-6 text-[#fef8f2]">
           Recommended of the Week
@@ -115,12 +110,10 @@ export default function Page() {
           Our most beloved breads. Made with natural ingredients and a lot of dedication.
         </p>
 
-        {/* Muestra uno de los productos (si existe) */}
         {Array.isArray(products) && products.length > 0 && (
           <ProductsGrid items={products.slice(0, 1)} />
         )}
 
-        {/* ✨ Texto animado marrón estilo aviso */}
         <div className="marquee-container">
           <p className="marquee-content">
             This product updates weekly based on customer favorites — taste the bread everyone loves
@@ -128,7 +121,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 🧺 TODOS LOS PRODUCTOS */}
       <section className="relative z-10 bg-[#6e8c6e]/80 py-12 px-6">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#fef8f2]">
           All Products
@@ -136,18 +128,14 @@ export default function Page() {
         <ProductsGrid items={products} />
       </section>
 
-      {/* 🪶 FOOTER */}
       <Footer />
 
-      {/* 🛒 BOTÓN DEL CARRITO */}
       <div className="fixed top-4 right-4 z-50">
         <CartButton onClick={() => setIsCartOpen(true)} />
       </div>
 
-      {/* 🛍️ MODAL DEL CARRITO */}
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
-      {/* 🎨 MODAL DE INFO (precios y delivery) */}
       <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
     </>
   );

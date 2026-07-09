@@ -12,7 +12,6 @@ export default function HomePage() {
   useEffect(() => {
     async function fetch() {
       const data = await getProducts()
-      console.log('📦 Productos cargados:', data) // 👈 importante
       setProducts(data)
     }
     fetch()
